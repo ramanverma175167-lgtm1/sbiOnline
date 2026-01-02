@@ -59,7 +59,11 @@ const FeaturesSection = () => {
             <h3>{feature.title}</h3>
             <p>{feature.description}</p>
 
-            <div className="feature-buttons">
+            <div
+              className={`feature-buttons ${
+                feature.buttons.length === 1 ? "single-button" : ""
+              }`}
+            >
               {feature.buttons.map((btn, btnIndex) => (
                 <button
                   key={btnIndex}
