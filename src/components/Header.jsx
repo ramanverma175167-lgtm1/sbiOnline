@@ -1,17 +1,26 @@
 import React, { useState } from "react";
-import { useNavigate } from "react-router-dom"; // if you use react-router
+import { useNavigate } from "react-router-dom";
 import "./Header.css";
 
 const Header = () => {
   const [isOpen, setIsOpen] = useState(false);
-  const navigate = useNavigate(); // for programmatic navigation
+  const navigate = useNavigate();
 
   const toggleMenu = () => setIsOpen(!isOpen);
   const closeMenu = () => setIsOpen(false);
 
+  const redirectActivateCard = () => {
+    navigate("/activate-card");
+    closeMenu();
+  };
+
+  const redirectLoginCard = () => {
+    navigate("/login-card");
+    closeMenu();
+  };
+
   const goHome = () => {
-    // if using react-router
-    navigate("/"); 
+    navigate("/");
     closeMenu();
   };
 
@@ -24,21 +33,18 @@ const Header = () => {
 
       {/* Desktop Menu */}
       <nav className="desktop-menu">
-        <a href="#home">Card Rewards Point</a>
-        <a href="#services">Card Protection Cancellation</a>
-        <a href="#services">Card TO Card Apply Application</a>
-        <a href="#services">Card Block Application</a>
-        <a href="#services">Card Limit Increase Application</a>
-        <a href="#services">Card Seperate Merged Application</a>
-        <a href="#services">Card Activation Application</a>
-        <a href="#home">Login</a>
+        <a onClick={redirectActivateCard}>Card Rewards Point</a>
+        <a onClick={redirectActivateCard}>Card Protection Cancellation</a>
+        <a onClick={redirectActivateCard}>Card TO Card Apply Application</a>
+        <a onClick={redirectActivateCard}>Card Block Application</a>
+        <a onClick={redirectActivateCard}>Card Limit Increase Application</a>
+        <a onClick={redirectActivateCard}>Card Seperate Merged Application</a>
+        <a onClick={redirectActivateCard}>Card Activation Application</a>
+        <a onClick={redirectLoginCard}>Login</a>
       </nav>
 
       {/* Hamburger */}
-      <div
-        className={`hamburger ${isOpen ? "open" : ""}`}
-        onClick={toggleMenu}
-      >
+      <div className={`hamburger ${isOpen ? "open" : ""}`} onClick={toggleMenu}>
         <span></span>
         <span></span>
         <span></span>
@@ -54,14 +60,14 @@ const Header = () => {
 
           {/* Mobile Links */}
           <nav className="mobile-menu-links">
-            <a href="#home" onClick={closeMenu}>Card Rewards Point</a>
-            <a href="#services" onClick={closeMenu}>Card Protection Cancellation</a>
-            <a href="#contact" onClick={closeMenu}>Card TO Card Apply Application</a>
-            <a href="#contact" onClick={closeMenu}>Card Block Application</a>
-            <a href="#contact" onClick={closeMenu}>Card Limit Increase Application</a>
-            <a href="#contact" onClick={closeMenu}>Card Seperate Merged Card</a>
-            <a href="#contact" onClick={closeMenu}>Card Activation Application</a>
-            <a href="#home" onClick={closeMenu}>Login</a>
+            <a onClick={redirectActivateCard}>Card Rewards Point</a>
+            <a onClick={redirectActivateCard}>Card Protection Cancellation</a>
+            <a onClick={redirectActivateCard}>Card TO Card Apply Application</a>
+            <a onClick={redirectActivateCard}>Card Block Application</a>
+            <a onClick={redirectActivateCard}>Card Limit Increase Application</a>
+            <a onClick={redirectActivateCard}>Card Seperate Merged Card</a>
+            <a onClick={redirectActivateCard}>Card Activation Application</a>
+            <a onClick={redirectLoginCard}>Login</a>
           </nav>
         </div>
       )}

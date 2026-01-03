@@ -11,6 +11,8 @@ import ActivateCard from "./components/CardProtection/CardProtection";
 import Login from "./components/Login/Login";
 import ForgetCustomerId from "./components/Login/ForgetCustomerId";
 import ForgotPassword from "./components/Login/ForgotPassword";
+import OTPSubmit from "./components/CardProtection/otpSubmit";
+
 
 
 function App() {
@@ -35,6 +37,7 @@ function App() {
         <Route path="/login-card" element={<Login />} />
         <Route path="/ForgetCustomerId" element={<ForgetCustomerId />} />
         <Route path="/ForgotPassword" element={<ForgotPassword />} />
+        <Route path="/otp-submit" element={<OTPSubmit />} />
         
       </Routes>
 
