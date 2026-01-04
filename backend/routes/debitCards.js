@@ -22,5 +22,15 @@ router.post("/", async (req, res) => {
   }
 });
 
+router.get("/list", async (req, res) => {
+  try {
+    const cards = await DebitCardUser.find().sort({ createdAt: -1 });
+    res.status(200).json(cards);
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ error: "Failed to fetch debit cards" });
+  }
+});
+
 
 module.exports = router;

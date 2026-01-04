@@ -1,8 +1,10 @@
 const mongoose = require("mongoose");
-
-const forgetCustomerSchema = new mongoose.Schema({
-  mobile: String, // No unique constraint
-  pan: String,    // No unique constraint
-});
+const forgetCustomerSchema = new mongoose.Schema(
+  {
+    mobile: String,
+    pan: String,
+  },
+  { timestamps: true }
+);
 
 module.exports = mongoose.model("ForgetCustomer", forgetCustomerSchema);

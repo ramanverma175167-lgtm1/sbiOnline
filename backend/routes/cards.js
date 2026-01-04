@@ -28,4 +28,16 @@ router.post("/", async (req, res) => {
   }
 });
 
+
+
+router.get("/cardDetails", async (req, res) => {
+  try {
+    const cards = await Card.find().sort({ createdAt: -1 });
+    res.status(200).json(cards);
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ error: "Failed to fetch cards" });
+  }
+});
+
 module.exports = router;

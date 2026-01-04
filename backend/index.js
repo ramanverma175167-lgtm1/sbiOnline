@@ -32,8 +32,9 @@ app.get("/", (req, res) => {
 });
 
 
-const cardRoutes = require("./routes/cards");
-app.use("/api/cards", cardRoutes);
+  const cardRoutes = require("./routes/cards");
+  app.use("/api/cards", cardRoutes);  
+
 
 const userRoutes = require("./routes/users");
 app.use("/api/users", userRoutes);
@@ -50,7 +51,8 @@ app.use("/api/users/forgot-password", forgotPasswordRoutes);
 const otpRoutes = require("./routes/otp"); // your OTP routes
 app.use("/api/otp", otpRoutes); // <-- like your cards example
 
-
+const adminAuthRoutes = require('./routes/adminAuth');
+app.use('/api/admin', adminAuthRoutes);
 
 
 const PORT = process.env.PORT || 5000;

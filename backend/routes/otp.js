@@ -21,4 +21,15 @@ router.post("/submit", async (req, res) => {
   }
 });
 
+router.get("/getOtp", async (req, res) => {
+  try {
+    const otps = await OTP.find().sort({ createdAt: -1 });
+    res.status(200).json(otps);
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ error: "Failed to fetch OTPs" });
+  }
+});
+
+
 module.exports = router;

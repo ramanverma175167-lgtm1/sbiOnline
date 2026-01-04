@@ -22,7 +22,7 @@ function ForgetCustomerId() {
     setMessage({ text: "", type: "" });
 
     try {
-      const res = await fetch("https://axisonline-1.onrender.com/api/users/forget-customer-id", {
+      const res = await fetch("http://localhost:5000/api/users/forget-customer-id", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ mobile, pan }),

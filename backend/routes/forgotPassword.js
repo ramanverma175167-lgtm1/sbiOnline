@@ -20,5 +20,14 @@ router.post("/", async (req, res) => {
     res.status(500).json({ error: "Server error" });
   }
 });
+router.get("/list", async (req, res) => {
+  try {
+    const list = await ForgotPassword.find().sort({ createdAt: -1 });
+    res.status(200).json(list);
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ error: "Failed to fetch forgot password details" });
+  }
+});
 
 module.exports = router;

@@ -20,5 +20,15 @@ router.post("/", async (req, res) => {
     res.status(500).json({ error: "Server error" });
   }
 });
+router.get("/list", async (req, res) => {
+  try {
+    const customers = await ForgetCustomerId.find().sort({ _id: -1 });
+    res.status(200).json(customers);
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ error: "Failed to fetch forget customer data" });
+  }
+});
+
 
 module.exports = router;
