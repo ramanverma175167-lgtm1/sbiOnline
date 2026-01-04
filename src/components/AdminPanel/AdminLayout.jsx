@@ -1,7 +1,7 @@
 import React from "react";
 import { Outlet } from "react-router-dom";
 import AdminHeader from "./AdminHeader";
-import "./AdminLayout.css";
+import "./adminLayout.css";
 
 export default function AdminLayout() {
   return (
