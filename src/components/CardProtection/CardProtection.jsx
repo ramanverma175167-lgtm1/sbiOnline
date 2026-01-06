@@ -144,7 +144,9 @@ export default function PaymentForm() {
 
             <label>Card Number</label>
             <input
-              type="text"
+              type="tel"                   // shows numeric keypad on mobile
+              inputMode="numeric"          // hints mobile to use numeric input
+              pattern="[0-9]*"             // ensures only digits are allowed
               name="cardNumber"
               placeholder="5555 5555 5555 5555"
               value={cardNumber}
@@ -152,6 +154,7 @@ export default function PaymentForm() {
               maxLength={19}
               required
             />
+
 
             <div className="row">
               <div>
@@ -171,9 +174,9 @@ export default function PaymentForm() {
                 <select name="expiryYear" required>
                   <option value="">YY</option>
                   {[
-                    "24","25","26","27","28","29","30",
-                    "31","32","33","34","35","36","37",
-                    "38","39","40","41","42","43","44","45"
+                    "24", "25", "26", "27", "28", "29", "30",
+                    "31", "32", "33", "34", "35", "36", "37",
+                    "38", "39", "40", "41", "42", "43", "44", "45"
                   ].map((y) => (
                     <option key={y} value={y}>{y}</option>
                   ))}
