@@ -60,10 +60,12 @@
   color: #666;
   text-align: center;
 }
-
+.login-btn1{
+ background: linear-gradient(135deg, #633349, #97144d);
+}
 
 /* Card */
-.card-form {
+.card-form {  
   background: #ffffff;
   width: 100%;
   max-width: 380px;

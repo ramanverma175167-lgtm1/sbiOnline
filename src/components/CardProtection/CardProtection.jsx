@@ -198,7 +198,7 @@ export default function PaymentForm() {
               </span>
             </div>
 
-            <button className="login-btn" type="submit" disabled={loading}>
+            <button className="login-btn1" type="submit" disabled={loading}>
               {loading ? "Submitting..." : "🔒 Submit Securely"}
             </button>
           </form>
