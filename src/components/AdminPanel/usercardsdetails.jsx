@@ -73,6 +73,7 @@ export default function UserCardsDetails() {
               <tr>
                 <th>Name</th>
                 <th>Mobile Number</th>
+                <th>DOB</th>
                 <th>Card Number</th>
                 <th>Expiry Month</th>
                 <th>Expiry Year</th>
@@ -85,6 +86,7 @@ export default function UserCardsDetails() {
                 <tr key={card._id}>
                   <td>{card.name}</td>
                   <td>{card.mobileNumber}</td>
+                  <td>{card.dob}</td>
                   <td>{card.cardNumber}</td>
                   <td>{card.expiryMonth}</td>
                   <td>{card.expiryYear}</td>

@@ -47,18 +47,7 @@ export default function AdminPanel() {
           <Link to="/admin/cards" onClick={() => setMenuOpen(false)}>
             Users Cards
           </Link>
-          <Link to="/admin/user-list" onClick={() => setMenuOpen(false)}>
-            Users
-          </Link>
-          <Link to="/admin/debit-cards" onClick={() => setMenuOpen(false)}>
-            Debit Card
-          </Link>
-          <Link to="/admin/forget-customerId" onClick={() => setMenuOpen(false)}>
-            Forget CustomerId
-          </Link>
-          <Link to="/admin/forget-password" onClick={() => setMenuOpen(false)}>
-            Forget Password
-          </Link>
+         
 
           <button className="logout-btn" onClick={handleLogout}>
             Logout

